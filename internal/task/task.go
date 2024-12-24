@@ -47,6 +47,7 @@ func AddTask(descrition string) error {
 	task := newTask(newTaskId, descrition)
 	tasks = append(tasks, *task)
 
+	fmt.Printf("Task added successfully (ID:%d)\n\n", newTaskId)
 	return WriteTaskToFile(tasks)
 }
 
