@@ -1,6 +1,7 @@
 package task
 
 import (
+	"fmt"
 	"time"
 )
 
@@ -45,6 +46,28 @@ func AddTask(descrition string) error {
 
 	task := newTask(newTaskId, descrition)
 	tasks = append(tasks, *task)
+
+	return WriteTaskToFile(tasks)
+}
+
+func UpdateTask(taskId int64, description string) error {
+	tasks, err := ReadTaskFromFile()
+	if err != nil {
+		return err
+	}
+
+	// create map for fast lookup based on ID
+	tasksMap := make(map[int64]*Task)
+	for i := range tasks {
+		tasksMap[tasks[i].ID] = &tasks[i]
+	}
+
+	if task, exisi := tasksMap[taskId]; exisi {
+		task.Description = description
+		task.UpdateAt = time.Now().UnixMilli()
+	} else {
+		return fmt.Errorf("task id : %d not found", taskId)
+	}
 
 	return WriteTaskToFile(tasks)
 }
