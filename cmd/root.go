@@ -17,5 +17,6 @@ complete code available at https://github.com/fanialfi/gotodo`,
 	cmd.AddCommand(NewAddCMD())
 	cmd.AddCommand(NewUpdateCMD())
 	cmd.AddCommand(NewDeleteCMD())
+	cmd.AddCommand(NewMarkInProgressCMD())
 	return cmd
 }
