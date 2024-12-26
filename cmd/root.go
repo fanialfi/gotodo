@@ -10,8 +10,8 @@ func NewRootCMD() *cobra.Command {
 		Short: "gotodo is a CLI tool for managing tasks",
 		Long: `gotodo is a CLI tool for managing tasks. It allow you to create, list, edit, and delete task
 		
-		you can also mark task as completed and update their status
-		complete code available at https://github.com/fanialfi/gotodo`,
+you can also mark task as completed and update their status
+complete code available at https://github.com/fanialfi/gotodo`,
 	}
 
 	cmd.AddCommand(NewAddCMD())
