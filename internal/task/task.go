@@ -9,6 +9,7 @@ import (
 type TaskStatus string
 
 const (
+	TASK_STATUS_TODO        TaskStatus = "todo"
 	TASK_STATUS_DONE        TaskStatus = "done"
 	TASK_STATUS_IN_PROGRESS TaskStatus = "in-progress"
 )
@@ -24,7 +25,7 @@ type Task struct {
 func newTask(taskId int64, desctiption string) *Task {
 	return &Task{
 		Description: desctiption,
-		Status:      TASK_STATUS_IN_PROGRESS,
+		Status:      TASK_STATUS_TODO,
 		ID:          taskId,
 		CreatedAt:   time.Now().UnixMilli(),
 		UpdateAt:    time.Now().UnixMilli(),
