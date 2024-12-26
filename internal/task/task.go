@@ -2,6 +2,7 @@ package task
 
 import (
 	"fmt"
+	"slices"
 	"time"
 )
 
@@ -69,6 +70,25 @@ func UpdateTask(taskId int64, description string) error {
 	} else {
 		return fmt.Errorf("task id : %d not found", taskId)
 	}
+
+	return WriteTaskToFile(tasks)
+}
+
+func DeleteTask(taskID int64) error {
+	tasks, err := ReadTaskFromFile()
+	if err != nil {
+		return err
+	}
+
+	indexTask := slices.IndexFunc(tasks, func(task Task) bool {
+		return task.ID == taskID
+	})
+
+	if indexTask >= 0 {
+		tasks = append(tasks[:indexTask], tasks[indexTask+1:]...)
+	}
+
+	tasks = slices.Clip(tasks)
 
 	return WriteTaskToFile(tasks)
 }
