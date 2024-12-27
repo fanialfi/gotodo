@@ -115,3 +115,24 @@ func MarkInProgressTask(taskID int64) error {
 
 	return WriteTaskToFile(tasks)
 }
+
+func MarkDoneTask(taskID int64) error {
+	tasks, err := ReadTaskFromFile()
+	if err != nil {
+		return err
+	}
+
+	taskMap := make(map[int64]*Task)
+	for i := range tasks {
+		taskMap[tasks[i].ID] = &tasks[i]
+	}
+
+	if task, exist := taskMap[taskID]; exist {
+		task.Status = TASK_STATUS_DONE
+		task.UpdateAt = time.Now().UnixMilli()
+	} else {
+		return fmt.Errorf("task id : %d not found", taskID)
+	}
+
+	return WriteTaskToFile(tasks)
+}

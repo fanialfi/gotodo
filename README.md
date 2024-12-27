@@ -6,7 +6,7 @@ todo
 - [x] update command
 - [x] delete command
 - [x] mark in progress command
-- [ ] mark done command
+- [x] mark done command
 - [ ] list command
 - [ ] list command by status done
 - [ ] list command by status todo
