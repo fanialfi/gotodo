@@ -8,7 +8,7 @@ todo
 - [x] mark in progress command
 - [x] mark done command
 - [x] list command
-- [ ] list command by status done
-- [ ] list command by status todo
-- [ ] list command by status in-progress
+- [x] list command by status done
+- [x] list command by status todo
+- [x] list command by status in-progress
 - [ ] enhance the output

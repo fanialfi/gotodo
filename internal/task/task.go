@@ -137,11 +137,41 @@ func MarkDoneTask(taskID int64) error {
 	return WriteTaskToFile(tasks)
 }
 
-func ListTask() (*[]Task, error) {
+func ListTask(status TaskStatus) (*[]Task, error) {
 	tasks, err := ReadTaskFromFile()
 	if err != nil {
 		return nil, err
 	}
 
-	return &tasks, nil
+	taskMap := make(map[TaskStatus]*Task)
+
+	switch status {
+	case TASK_STATUS_DONE:
+		for _, task := range tasks {
+			if task.Status == TASK_STATUS_DONE {
+				taskMap[task.Status] = &task
+			}
+		}
+	case TASK_STATUS_TODO:
+		for _, task := range tasks {
+			if task.Status == TASK_STATUS_TODO {
+				taskMap[task.Status] = &task
+			}
+		}
+	case TASK_STATUS_IN_PROGRESS:
+		for _, task := range tasks {
+			if task.Status == TASK_STATUS_IN_PROGRESS {
+				taskMap[task.Status] = &task
+			}
+		}
+	default:
+		return &tasks, nil
+	}
+
+	tasksResult := make([]Task, 0, len(taskMap))
+	for _, task := range taskMap {
+		tasksResult = append(tasksResult, *task)
+	}
+
+	return &tasksResult, nil
 }
