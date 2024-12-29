@@ -136,3 +136,12 @@ func MarkDoneTask(taskID int64) error {
 
 	return WriteTaskToFile(tasks)
 }
+
+func ListTask() (*[]Task, error) {
+	tasks, err := ReadTaskFromFile()
+	if err != nil {
+		return nil, err
+	}
+
+	return &tasks, nil
+}
