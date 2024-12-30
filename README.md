@@ -11,4 +11,4 @@ todo
 - [x] list command by status done
 - [x] list command by status todo
 - [x] list command by status in-progress
-- [ ] enhance the output
+- [x] enhance the output

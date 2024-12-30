@@ -1,10 +1,8 @@
 package cmd
 
 import (
-	"fmt"
-	"time"
-
 	"github.com/fanialfi/gotodo/internal/task"
+	"github.com/fanialfi/gotodo/lib"
 	"github.com/spf13/cobra"
 )
 
@@ -46,44 +44,28 @@ func runListCMD(cmd *cobra.Command) error {
 			return err
 		}
 
-		fmt.Println("Tasks (Done)")
-		for _, task := range *tasks {
-			creationTime := time.UnixMilli(task.CreatedAt).Format("Monday, 02-Jan-2006 15:00:4")
-			fmt.Printf("ID:%d\t%s\t\t%s (%v)\n", task.ID, task.Status, task.Description, creationTime)
-		}
+		lib.PrintingOutput(tasks, "Tasks (Done)")
 	} else if in_progress {
 		tasks, err := task.ListTask(task.TASK_STATUS_IN_PROGRESS)
 		if err != nil {
 			return err
 		}
 
-		fmt.Println("Tasks (in-progress)")
-		for _, task := range *tasks {
-			creationTime := time.UnixMilli(task.CreatedAt).Format("Monday, 02-Jan-2006 15:00:4")
-			fmt.Printf("ID:%d\t%s\t\t%s (%v)\n", task.ID, task.Status, task.Description, creationTime)
-		}
+		lib.PrintingOutput(tasks, "Tasks (in-progress)")
 	} else if todo {
 		tasks, err := task.ListTask(task.TASK_STATUS_TODO)
 		if err != nil {
 			return err
 		}
 
-		fmt.Println("Tasks (todo)")
-		for _, task := range *tasks {
-			creationTime := time.UnixMilli(task.CreatedAt).Format("Monday, 02-Jan-2006 15:00:4")
-			fmt.Printf("ID:%d\t%s\t\t%s (%v)\n", task.ID, task.Status, task.Description, creationTime)
-		}
+		lib.PrintingOutput(tasks, "Tasks (todo)")
 	} else {
 		tasks, err := task.ListTask("all")
 		if err != nil {
 			return err
 		}
 
-		fmt.Println("Tasks (all)")
-		for _, task := range *tasks {
-			creationTime := time.UnixMilli(task.CreatedAt).Format("Monday, 02-Jan-2006 15:00:4")
-			fmt.Printf("ID:%d\t%s\t\t%s (%v)\n", task.ID, task.Status, task.Description, creationTime)
-		}
+		lib.PrintingOutput(tasks, "Tasks (all)")
 	}
 
 	return nil
