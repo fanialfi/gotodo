@@ -8,6 +8,8 @@ import (
 )
 
 func NewDeleteCMD() *cobra.Command {
+	var id int
+
 	cmd := &cobra.Command{
 		Use:   "delete",
 		Short: "hapus task dari data",
@@ -17,7 +19,7 @@ func NewDeleteCMD() *cobra.Command {
 		},
 	}
 
-	cmd.Flags().Int("id", 0, "task id")
+	cmd.Flags().IntVarP(&id, "id", "i", 0, "task id")
 	cmd.MarkFlagRequired("id")
 
 	return cmd

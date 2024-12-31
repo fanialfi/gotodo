@@ -9,6 +9,7 @@ import (
 )
 
 func NewAddCMD() *cobra.Command {
+	var description string
 	cmd := &cobra.Command{
 		Use:   "add",
 		Short: "add task to the task list",
@@ -17,12 +18,13 @@ func NewAddCMD() *cobra.Command {
 		},
 	}
 
-	cmd.Flags().String("description", "", "name task")
+	cmd.Flags().StringVarP(&description, "description", "d", "", "name task")
 	err := cmd.MarkFlagRequired("description")
 	if err != nil {
 		log.Printf("Error marking flags as required : %s\n", err.Error())
 		return nil
 	}
+
 	return cmd
 }
 
